@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div>111222333</div>
+<div>
+    <input id="a" type="text">
+    <button id="b" onclick="handleClickB()">b</button>
+    <button id="c" onclick="handleClickC()">c</button>
+</div>
+<script type="text/javascript">
+    // 按顺序控制异步流程
+    var domA = document.querySelector('#a');
+    var domB = document.querySelector('#b');
+    var dom = document.querySelector('#c');
+
+    var P = Promise.resolve();
+
+    function handleClickB() {
+        console.log('handle click b');
+        P = P.then(function(){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                    domA.value = 'b';
+                },1000);
+            });
+        })
+    }
+
+    function handleClickC() {
+        console.log('handle click c');
+        P = P.then(function(){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                    domA.value = 'c';
+                }, 1000);
+            })
+        });
+    }
+
+
+
+</script>
+</body>
+</html>
