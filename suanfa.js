@@ -23,10 +23,10 @@ function quickSort(arr) {
     arr.forEach((item)=>{
         if(item < mid){
         left.push(item)
-    }else{
-        right.push(item)
-    }
-})
+        }else{
+            right.push(item)
+        }
+    });
 
     return [...quickSort(left),mid,...quickSort(right)]
 }
@@ -52,7 +52,7 @@ function convert(list) {
     let obj = {};
     list.forEach((item)=>{
         obj[item.id] = item;
-})
+    });
     list.forEach((item)=>{
         if(item.parentId !== 0){
         obj[item.parentId]['children'] ? obj[item.parentId]['children'].push(item) : obj[item.parentId]['children'] = [item]
