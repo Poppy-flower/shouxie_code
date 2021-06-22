@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两行省略+展开</title>
+  <style>
+    .list{
+      padding: 20px;
+      background-color: pink;
+    }
+    .showlist{
+      width: 500px;
+      font-size: 0;
+      /* 正常换行 */
+      white-space: normal;
+      /* 超出两行省略 */
+      display: -webkit-box; /*搭配：将对象作为弹性伸缩盒子模型显示*/
+      -webkit-box-orient: vertical; /*搭配：设置或检索伸缩盒对象的子元素的排列方式*/
+      -webkit-line-clamp: 2;  /* 主要：在一个块元素显示的文本的行数 */
+
+      /* overflow: hidden; */
+    }
+    .showlist span{
+      font-size: 16px;
+      display: inline-block;
+      padding: 5px;
+      line-height: 20px;
+      background-color: #ccc;
+      border-radius: 20px;
+      margin-right: 5px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="list">
+  <div class="showlist">
+    <span>哈哈哈哈哈</span></span>
+    <span>表达式北京市成本价</span>
+    <span>纯净水参考，你参考价，才可</span>
+    <span>才能收到VN，妇女</span>
+    <span>才能晋升的女就服你</span>
+    <span>承诺的那麻烦您</span>
+    <span> MV即可成，女款</span>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
