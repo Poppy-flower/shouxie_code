@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Web Component</title>
+	</head>
+
+	<body>
+		<my-button text="Hello"></my-button>
+
+		<template id="mybutton">
+			<style>
+				button {
+					width: 60px;
+					height: 30px;
+					cursor: pointer;
+					color: blue;
+					border: 0;
+					border-radius: 5px;
+					background-color: #F0F0F0;
+				}
+			</style>
+			<button id="btn">Add</button>
+		</template>
+	</body>
+	<script>
+
+		class MyButton extends HTMLElement {
+			constructor() {
+				super()
+				const template = document.getElementById('mybutton');
+				const content = template.content.cloneNode(true);
+				const button = content.querySelector('#btn');
+				const text = this.getAttribute('text');
+				button.innerText = text;
+				button.addEventListener('click', (evt) => {
+					this.onClick("Hello from within the Custom Element");
+				})
+				this.appendChild(content);
+			}
+		}
+
+		window.customElements.define('my-button', MyButton)
+
+		document.querySelector('my-button').onClick = value => {
+			console.log(value);
+		}
+	</script>
+
+</html>
