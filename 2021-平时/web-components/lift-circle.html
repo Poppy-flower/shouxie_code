@@ -3,14 +3,15 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Web Component</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
 	</head>
 
 	<body>
-		<my-button text='hello'>
-			<p slot="my-text">Another Text from outside</p>
+		<my-button>
+			<p slot="my-text">Another text from outside</p>
 		</my-button>
-
 		<template id="mybutton">
 			<style>
 				button {
@@ -23,10 +24,12 @@
 					background-color: #F0F0F0;
 				}
 			</style>
-			<button id="btn">Add</button>
-			<p>
-				<slot name="my-text">My Default Text</slot>
-			</p>
+			<div>
+				<button id="btn">Add</button>
+				<p>
+					<slot name="my-text">My Default Text</slot>
+				</p>
+			</div>
 		</template>
 	</body>
 	<script>
@@ -37,53 +40,38 @@
 				const template = document.getElementById('mybutton');
 				const content = template.content.cloneNode(true);
 				const button = content.querySelector('#btn');
-				const text = this.getAttribute('text');
 				this.$button = button;
-				button.innerText = text;
-				// 1、添加自定义方法
-				// button.addEventListener('click', (evt) => {
-				// 	this.onClick("Hello from within the Custom Element");
-				// })
-
-				// 2、使用自定义事件
 				button.addEventListener('click', (evt) => {
 					this.dispatchEvent(
 						new CustomEvent('onClick', {
-							detail: 'Hello from within the Custom Element2',
+							detail: 'Hello fom within the Custom Element'
 						})
 					)
-				});
+				})
 				this.attachShadow({ mode: 'open' }).appendChild(content);
 			}
-
 			get text() {
 				return this.getAttribute('text');
 			}
-
 			set text(value) {
 				this.setAttribute('text', value);
 			}
-
 			static get observedAttributes() {
 				return ['text'];
 			}
-
 			attributeChangedCallback(name, oldVal, newVal) {
-				this[name] = newVal;
 				this.render();
 			}
-
 			render() {
 				this.$button.innerText = this.text;
 			}
-
 		}
-
-		window.customElements.define('my-button', MyButton)
-
-		document.querySelector('my-button').addEventListener('onClick', (value) => {
-			console.log(value);
+		const mybutton = document.querySelector('my-button');
+		mybutton.addEventListener('onClick', (value) => {
+			console.log(value)
+			mybutton.text = value
 		});
+		window.customElements.define('my-button', MyButton)
 	</script>
 
 </html>
